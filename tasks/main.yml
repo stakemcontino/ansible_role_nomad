@@ -1,0 +1,10 @@
+---
+- include_tasks: setup-RedHat.yml
+  when: ansible_distribution == "CentOS"
+
+- include_tasks: setup-Amazon.yml
+  when: ansible_distribution == "Amazon"
+
+- include_tasks: supervisord.yml
+
+- include_tasks: nomad.yml

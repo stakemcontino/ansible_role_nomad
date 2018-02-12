@@ -1,0 +1,29 @@
+---
+- name: create nomad group
+  group:
+    name: nomad
+    state: present
+
+- name: create nomad user
+  user:
+    name: nomad
+    comment: "Hashicorp Nomad"
+    group: nomad
+
+- name: create nomad paths
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0755
+  with_items:
+    - /opt/nomad
+    - /opt/nomad/bin
+    - /opt/nomad/config
+    - /opt/nomad/data
+    - /opt/nomad/log
+
+- name: Download nomad binary
+  get_url:
+    url: "https://releases.hashicorp.com/nomad/0.7.1/nomad_0.7.1_linux_amd64.zip"
+    dest: /opt/nomad/bin/nomad
+    mode: 0755

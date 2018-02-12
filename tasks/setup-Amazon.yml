@@ -1,0 +1,19 @@
+---
+- name: install dependencies
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - curl
+    - unzip
+    - jq
+    - python-setuptools
+
+- name: install pip
+  easy_install:
+    name: pip
+
+- name: install awscli
+  pip:
+    name: awscli
+  become: "True"

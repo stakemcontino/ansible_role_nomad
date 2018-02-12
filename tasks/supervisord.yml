@@ -1,0 +1,34 @@
+---
+- name: install supervisord
+  pip:
+    name: supervisor
+  become: "True"
+
+- name: create supervisord log directory
+  file:
+    path: /var/log/supervisor
+    state: directory
+    mode: 0644
+
+- name: supervisor init script
+  copy:
+    src: files/supervisor-initd-script.sh
+    dest: /etc/init.d/supervisor
+    owner: root
+    group: root
+    mode: 0755
+
+# Reference: http://supervisord.org/installing.html
+- name: supervisor config
+  copy:
+    src: files/supervisord.conf
+    dest: /etc/supervisord.conf
+    owner: root
+    group: root
+    mode: 0644
+  register: supervisord_config
+
+# To Do
+#  create_supervisor_config
+#  sudo chkconfig --add supervisor
+#  sudo chkconfig supervisor on
