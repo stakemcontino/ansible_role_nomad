@@ -1,4 +1,4 @@
-# What is molecule 
+# What is molecule
 
 https://molecule.readthedocs.io/en/latest/index.html
 
@@ -7,16 +7,18 @@ https://molecule.readthedocs.io/en/latest/index.html
 This ansible role takes the base structure from ansible galaxy and adds molecule as a testing capability
 
 Optional step to create a Python Virtual Environment
+
     virtualenv -p /usr/local/bin/python2.7 venv
     source venv/bin/activate
     pip install ansible molecule 'docker<3.0.0'
 
 Step to create the ansible module
+
     ansible-galaxy init ansible_role_nomad
     cd ansible_role_nomad
     molecule init scenario --scenario-name default --role-name ansible_role_nomad
 
-N.B. The default scenario uses docker as the driver to test the ansible role. Other drivers are available.
+N.B. The default scenario uses docker as the driver to test the ansible role.
 
 ## Molecule: lint
 
@@ -25,9 +27,10 @@ Out of the box molecule will lint 3 types of files
 2. https://github.com/willthames/ansible-lint
 3. http://flake8.pycqa.org/en/latest/
 
-All can be configured or if you really want, disabled altogether.
+All of the lint tools are configurable or if you really want, disabled altogether.
 
-To lint all the relevant code, run the following
+To lint all the relevant code, run the following:
+
     molecule lint
 
 ## Molecule: create
@@ -40,7 +43,7 @@ N.B. The docker containers that are created are defined here molecule/default/mo
 
 ## Molecule: converge
 
-Will execute the sequence necessary to converge the instances. Which means run the molecule/default/playbook.yml against the instance created above.
+Will execute the sequence necessary to converge the instances. Which means executing molecule/default/playbook.yml against the instance created above.
 
     molecule converge
 
@@ -50,6 +53,9 @@ Is the ansible role idempotent, aka does its produce repeatable and consistent r
 which results in a task running even if nothing needs to be done.
 
     molecule idempotence
+
+The principal of idempotence in ansible is explored in the following blog post, by the author or ansible-lint http://willthames.github.io/2016/09/21/using-command-and-shell-in-ansible.html
+
 
 ## Molecule: verify
 
