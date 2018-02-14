@@ -15,3 +15,7 @@ def test_nomad_user(host):
 
 def test_nomad_directories(host):
     host.file('/opt/nomad').is_directory
+
+
+def test_nomad_binary(host):
+    host.file('/opt/nomad/bin/nomad').exists
